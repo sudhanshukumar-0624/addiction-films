@@ -121,7 +121,7 @@ document.querySelectorAll('.portfolio-item').forEach(item => {
     });
 });
 
-// Rotating Hero Taglines
+// Rotating Hero Taglines with Typing Effect
 const taglines = [
     "Welcome to a World Where Your Dream Wedding Comes to Life.",
     "Crafting Timeless Weddings with Elegance and Precision.",
@@ -130,19 +130,36 @@ const taglines = [
 
 let currentTagline = 0;
 const taglineElement = document.getElementById('heroTagline');
+let charIndex = 0;
+let isDeleting = false;
 
 if (taglineElement) {
-    function rotateTagline() {
-        taglineElement.style.opacity = '0';
+    function typeTagline() {
+        const currentText = taglines[currentTagline];
         
-        setTimeout(() => {
+        if (isDeleting) {
+            taglineElement.textContent = currentText.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            taglineElement.textContent = currentText.substring(0, charIndex + 1);
+            charIndex++;
+        }
+        
+        let typeSpeed = isDeleting ? 30 : 80;
+        
+        if (!isDeleting && charIndex === currentText.length) {
+            typeSpeed = 2000;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
             currentTagline = (currentTagline + 1) % taglines.length;
-            taglineElement.textContent = taglines[currentTagline];
-            taglineElement.style.opacity = '1';
-        }, 500);
+            typeSpeed = 500;
+        }
+        
+        setTimeout(typeTagline, typeSpeed);
     }
     
-    setInterval(rotateTagline, 4000);
+    typeTagline();
 }
 
 // Counter Animation for Stats

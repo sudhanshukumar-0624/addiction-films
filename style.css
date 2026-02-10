@@ -167,11 +167,17 @@ body {
     font-style: italic;
     font-size: 1.8rem;
     font-weight: 400;
-    transition: opacity 0.5s ease;
     min-height: 2em;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
     letter-spacing: 0.5px;
     line-height: 1.4;
+    border-right: 3px solid #ff6b6b;
+    animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+    from, to { border-color: transparent; }
+    50% { border-color: #ff6b6b; }
 }
 
 .rating {
