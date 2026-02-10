@@ -123,9 +123,12 @@ document.querySelectorAll('.portfolio-item').forEach(item => {
 
 // Rotating Hero Taglines with Typing Effect
 const taglines = [
-    "Welcome to a World Where Your Dream Wedding Comes to Life.",
-    "Crafting Timeless Weddings with Elegance and Precision.",
-    "Turning Your Special Moments into Beautiful Memories."
+    "Wedding Photography",
+    "Cinematic Videography",
+    "Pre-Wedding Shoots",
+    "Event Coverage",
+    "Corporate Events",
+    "Birthday Parties"
 ];
 
 let currentTagline = 0;
