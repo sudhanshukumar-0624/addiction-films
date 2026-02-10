@@ -188,6 +188,11 @@ body {
 .review-count {
     font-size: 1rem;
     color: #ddd;
+    transition: color 0.3s;
+}
+
+.review-count:hover {
+    color: #ffd700;
 }
 
 .cta-btn {
