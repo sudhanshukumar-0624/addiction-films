@@ -141,22 +141,23 @@ if (taglineElement) {
         const currentText = taglines[currentTagline];
 
         if (isDeleting) {
-            taglineElement.textContent = currentText.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            taglineElement.textContent = currentText.substring(0, charIndex + 1);
-            charIndex++;
-        }
-
-        let typeSpeed = isDeleting ? 30 : 80;
-
-        if (!isDeleting && charIndex === currentText.length) {
-            typeSpeed = 2000;
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
+            // Instant clear logic
+            taglineElement.textContent = '';
+            charIndex = 0;
             isDeleting = false;
             currentTagline = (currentTagline + 1) % taglines.length;
-            typeSpeed = 500;
+            setTimeout(typeTagline, 500); // Short pause before starting next word
+            return;
+        }
+
+        taglineElement.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+
+        let typeSpeed = 80;
+
+        if (charIndex === currentText.length) {
+            typeSpeed = 2000; // Wait time at end of word
+            isDeleting = true; // Set flag to trigger clear on next loop
         }
 
         setTimeout(typeTagline, typeSpeed);

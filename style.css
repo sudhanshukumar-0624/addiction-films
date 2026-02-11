@@ -94,6 +94,13 @@ a {
     align-items: center;
     gap: 0.8rem;
     text-transform: uppercase;
+    line-height: 1;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .logo span {
@@ -101,10 +108,29 @@ a {
 }
 
 .logo-icon {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    /* Slightly larger icon */
+    height: 40px;
     object-fit: contain;
-    /* Removed filter to show original logo colors */
+}
+
+.nav-book-btn {
+    font-size: 0.7rem;
+    color: var(--white);
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid var(--primary-color);
+    padding: 2px 8px;
+    margin-top: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.nav-book-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
 }
 
 .nav-links {
@@ -1064,5 +1090,77 @@ footer {
     .portfolio-item.large {
         grid-column: span 1;
         height: 350px;
+    }
+}
+
+/* Photo Reel Section */
+.photo-reel {
+    background: var(--bg-color);
+    padding: 6rem 0;
+    /* Huge padding for pop-out effect */
+    overflow: hidden;
+    border-bottom: 1px solid #1a1a1a;
+}
+
+.reel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 3rem 0;
+    /* Extra safety padding for pop-out, creating space */
+}
+
+.reel-track {
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    animation: scroll 30s linear infinite;
+    padding-left: 1rem;
+}
+
+/* Ensure links align properly */
+.reel-track a {
+    display: block;
+    height: 300px;
+    /* Base size */
+    flex-shrink: 0;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    z-index: 1;
+}
+
+.reel-img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+    filter: brightness(0.8);
+    transform-origin: center center;
+}
+
+.reel-track a:hover {
+    transform: scale(1.4);
+    /* Scale the container to ensure flow starts */
+    z-index: 1000;
+}
+
+.reel-track a:hover .reel-img {
+    filter: brightness(1.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 0 2px var(--primary-color);
+}
+
+.reel-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-50% - 0.5rem));
     }
 }
