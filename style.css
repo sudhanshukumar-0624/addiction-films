@@ -24,6 +24,23 @@ body {
     overflow-x: hidden;
 }
 
+.cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 87, 34, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    mix-blend-mode: screen;
+    opacity: 0;
+    /* Initially hidden until JS kicks in */
+    transition: opacity 0.5s ease;
+}
+
 h1,
 h2,
 h3,

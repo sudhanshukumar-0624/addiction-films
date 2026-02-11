@@ -66,23 +66,23 @@ window.addEventListener('scroll', () => {
 const bookingForm = document.getElementById('bookingForm');
 bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
     // Get form values
     const name = bookingForm.querySelector('input[type="text"]').value;
     const email = bookingForm.querySelector('input[type="email"]').value;
     const phone = bookingForm.querySelector('input[type="tel"]').value;
     const serviceType = bookingForm.querySelector('select').value;
     const message = bookingForm.querySelector('textarea').value;
-    
+
     // Create WhatsApp message
     const whatsappMessage = `*New Booking Inquiry*%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Email:* ${encodeURIComponent(email)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Service Type:* ${encodeURIComponent(serviceType)}%0A*Message:* ${encodeURIComponent(message)}`;
-    
+
     // WhatsApp number (replace with your number)
     const whatsappNumber = '919304855444';
-    
+
     // Open WhatsApp
     window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank');
-    
+
     // Reset form
     bookingForm.reset();
 });
@@ -139,7 +139,7 @@ let isDeleting = false;
 if (taglineElement) {
     function typeTagline() {
         const currentText = taglines[currentTagline];
-        
+
         if (isDeleting) {
             taglineElement.textContent = currentText.substring(0, charIndex - 1);
             charIndex--;
@@ -147,9 +147,9 @@ if (taglineElement) {
             taglineElement.textContent = currentText.substring(0, charIndex + 1);
             charIndex++;
         }
-        
+
         let typeSpeed = isDeleting ? 30 : 80;
-        
+
         if (!isDeleting && charIndex === currentText.length) {
             typeSpeed = 2000;
             isDeleting = true;
@@ -158,10 +158,10 @@ if (taglineElement) {
             currentTagline = (currentTagline + 1) % taglines.length;
             typeSpeed = 500;
         }
-        
+
         setTimeout(typeTagline, typeSpeed);
     }
-    
+
     typeTagline();
 }
 
@@ -177,7 +177,7 @@ const counterObserver = new IntersectionObserver((entries) => {
                 const target = +counter.getAttribute('data-target');
                 const increment = target / 100;
                 let count = 0;
-                
+
                 const updateCounter = () => {
                     if (count < target) {
                         count += increment;
@@ -187,7 +187,7 @@ const counterObserver = new IntersectionObserver((entries) => {
                         counter.textContent = target + '+';
                     }
                 };
-                
+
                 updateCounter();
             });
         }
@@ -197,4 +197,19 @@ const counterObserver = new IntersectionObserver((entries) => {
 const statsSection = document.querySelector('.stats');
 if (statsSection) {
     counterObserver.observe(statsSection);
+}
+
+// Mouse Interaction Effect
+const cursorGlow = document.querySelector('.cursor-glow');
+
+if (cursorGlow) {
+    document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+        cursorGlow.style.opacity = '1';
+    });
+
+    document.addEventListener('mouseleave', () => {
+        cursorGlow.style.opacity = '0';
+    });
 }
