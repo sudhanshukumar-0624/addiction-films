@@ -3,29 +3,43 @@
 
 <head>
     <meta charset="UTF-8">
+    <!-- Viewport settings for responsive design on mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Title of the webpage shown in the browser tab -->
     <title>Addiction Films - Best Wedding Photographer in Jamshedpur</title>
+    <!-- Favicon (logo) for the browser tab -->
     <link rel="icon" type="image/jpeg" href="images/logo 2.jpg">
+    <!-- Preconnect to Google Fonts for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Importing Oswald and Open Sans fonts from Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600;700&display=swap"
         rel="stylesheet">
+    <!-- Importing Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Linking the external CSS file for styling -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- Cursor glow effect div -->
     <div class="cursor-glow"></div>
+
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="container">
+            <!-- Logo Section -->
             <div class="logo">
                 <img src="images/logo 2.jpg" alt="Addiction Films Logo" class="logo-icon">
                 <div class="logo-text">
                     Addiction Films
+                    <!-- Book Now button in the logo area -->
                     <a href="#contact" class="nav-book-btn">Book Now</a>
                 </div>
             </div>
+
+            <!-- Navigation Links -->
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
@@ -33,6 +47,8 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+
+            <!-- Hamburger Menu Icon for Mobile -->
             <div class="hamburger">
                 <span></span>
                 <span></span>
@@ -41,20 +57,32 @@
         </div>
     </nav>
 
+    <!-- Hero Section (Home) -->
     <section id="home" class="hero">
         <div class="container hero-container">
+            <!-- Large floating text for visual impact -->
             <div class="hero-text-large">
                 <span class="outline-text">ADDICTION</span>
                 <span class="solid-text">FILMS</span>
             </div>
+
+            <!-- Collage of images in the background -->
             <div class="hero-collage">
                 <div class="hero-img-main">
-                    <img src="images/hero-bg.jpg" alt="Wedding Moments">
+                    <img src="images/hero-bg.jpg" alt="Wedding Moments" class="slide active">
+                    <img src="images/about-us.jpg" alt="Capture Emotion" class="slide">
+                    <img src="images/gallery-1.jpg" alt="Gallery Image" class="slide">
+                    <img src="images/service-2.jpg" alt="Cinematic Shot" class="slide">
                 </div>
                 <div class="hero-img-accent">
-                    <img src="images/about-us.jpg" alt="Capture Emotion">
+                    <img src="images/about-us.jpg" alt="Capture Emotion" class="slide active">
+                    <img src="images/gallery-5.jpg" alt="Gallery Image" class="slide">
+                    <img src="images/portfolio/prewedding-1.jpg" alt="Pre Wedding" class="slide">
+                    <img src="images/service-3.jpg" alt="Service Shot" class="slide">
                 </div>
             </div>
+
+            <!-- Bottom text and rating -->
             <div class="hero-bottom-text">
                 <p id="heroTagline">Wedding Photography</p>
                 <div class="rating">
@@ -62,16 +90,16 @@
                     <a href="https://www.google.com/maps/search/?api=1&query=Addiction+Films+Jamshedpur" target="_blank"
                         class="review-text">4.9/5 (289 Reviews)</a>
                 </div>
-
             </div>
         </div>
     </section>
 
 
+    <!-- Photo Reel Section (Scrolling Images) -->
     <section class="photo-reel">
         <div class="reel-container">
             <div class="reel-track">
-                <!-- Duplicate images for seamless scrolling -->
+                <!-- Duplicate images for seamless infinite scrolling animation -->
                 <a href="#portfolio"><img src="images/gallery-1.jpg" alt="Gallery 1" class="reel-img"></a>
                 <a href="#portfolio"><img src="images/gallery-2.jpg" alt="Gallery 2" class="reel-img"></a>
                 <a href="#portfolio"><img src="images/gallery-3.jpg" alt="Gallery 3" class="reel-img"></a>
@@ -82,7 +110,7 @@
                 <a href="#portfolio"><img src="images/service-3.jpg" alt="Service 3" class="reel-img"></a>
 
 
-                <!-- Duplicate set -->
+                <!-- Duplicate set for continuity -->
                 <a href="#portfolio"><img src="images/gallery-1.jpg" alt="Gallery 1" class="reel-img"></a>
                 <a href="#portfolio"><img src="images/gallery-2.jpg" alt="Gallery 2" class="reel-img"></a>
                 <a href="#portfolio"><img src="images/gallery-3.jpg" alt="Gallery 3" class="reel-img"></a>
@@ -96,6 +124,7 @@
         </div>
     </section>
 
+    <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
             <h2>Our Services</h2>
@@ -141,8 +170,10 @@
         </div>
     </section>
 
+    <!-- Gallery Grid Section -->
     <section class="gallery">
         <div class="gallery-grid">
+            <!-- Individual gallery items with varying sizes -->
             <div class="gallery-item tall">
                 <img src="images/gallery-1.jpg" alt="Gallery Image 1" class="gallery-img">
             </div>
@@ -170,6 +201,7 @@
         </div>
     </section>
 
+    <!-- Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <div class="container">
             <h2>Our Work</h2>
@@ -248,6 +280,7 @@
         </div>
     </section>
 
+    <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
             <div class="about-content">
@@ -280,6 +313,7 @@
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
             <h2>Get In Touch</h2>
@@ -376,6 +410,7 @@
         </div>
     </section>
 
+    <!-- Footer Section -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -440,6 +475,7 @@
         </div>
     </footer>
 
+    <!-- Linking the external JavaScript file -->
     <script src="script.js"></script>
 </body>
 
