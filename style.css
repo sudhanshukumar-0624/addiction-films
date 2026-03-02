@@ -312,9 +312,7 @@ a {
     z-index: 1;
 }
 
-.hero-img-accent .slide.slide-small {
-    /* No scaling to prevent border gaps, the 25vw container handles the size reduction */
-}
+/* .hero-img-accent .slide.slide-small removed as it was empty */
 
 /* Slider Styles for Accent Image */
 .hero-img-accent .slide {
@@ -1135,9 +1133,10 @@ footer {
 
     .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 150px;
+        gap: 5px;
+        /* Tighter gap on mobile */
     }
-
-
 
     .portfolio-grid {
         grid-template-columns: 1fr;
@@ -1146,6 +1145,48 @@ footer {
     .portfolio-item.large {
         grid-column: span 1;
         height: 350px;
+    }
+
+    /* Hero Section Mobile Adjustments */
+    .hero-collage {
+        opacity: 0.2;
+        /* Lower opacity on mobile to keep text legible */
+    }
+
+    .hero-img-main {
+        width: 60vw;
+        right: 0;
+        top: 20%;
+        bottom: auto;
+        opacity: 0.6;
+    }
+
+    .hero-img-accent {
+        width: 40vw;
+        left: 0;
+        top: 40%;
+        bottom: auto;
+        opacity: 0.6;
+    }
+
+    .hero-text-large span {
+        font-size: clamp(2rem, 15vw, 4rem);
+    }
+}
+
+/* Photo Reel Responsiveness */
+@media (max-width: 768px) {
+    .photo-reel {
+        padding: 3rem 0;
+    }
+
+    .reel-track a {
+        height: 180px;
+        /* Smaller reel on mobile */
+    }
+
+    .reel-container {
+        padding: 1.5rem 0;
     }
 }
 
