@@ -260,8 +260,8 @@ a {
     height: 100%;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.4;
-    /* Dim background images to let text pop */
+    opacity: 1;
+    /* Fully visible background images */
 }
 
 .hero-img-main {
@@ -1148,10 +1148,6 @@ footer {
     }
 
     /* Hero Section Mobile Adjustments */
-    .hero-collage {
-        opacity: 0.4;
-        /* Balanced opacity for visibility and legibility on mobile */
-    }
 
     .hero-img-main {
         width: 60vw;
