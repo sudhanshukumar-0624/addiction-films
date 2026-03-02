@@ -1149,8 +1149,8 @@ footer {
 
     /* Hero Section Mobile Adjustments */
     .hero-collage {
-        opacity: 0.2;
-        /* Lower opacity on mobile to keep text legible */
+        opacity: 0.4;
+        /* Balanced opacity for visibility and legibility on mobile */
     }
 
     .hero-img-main {
