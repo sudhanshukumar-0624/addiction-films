@@ -261,3 +261,33 @@ if (cursorGlow) {
         cursorGlow.style.opacity = '0'; // Hide when mouse leaves window
     });
 }
+
+// Gallery Lightbox Logic
+const modal = document.getElementById('galleryModal');
+const modalImg = document.getElementById('modalImg');
+const captionText = document.getElementById('caption');
+const closeBtn = document.querySelector('.close');
+
+document.querySelectorAll('.gallery-img').forEach(img => {
+    img.addEventListener('click', function () {
+        modal.classList.add('active');
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+    });
+});
+
+// Close modal when clicked on (X) button
+if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+}
+
+// Close modal when clicked outside the image
+if (modal) {
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.remove('active');
+        }
+    });
+}
