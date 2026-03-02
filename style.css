@@ -87,7 +87,7 @@ a {
     backdrop-filter: blur(10px);
     /* Frosted glass effect */
     z-index: 1000;
-    padding: 1.5rem 0;
+    padding: 0.5rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.3s ease;
 }
@@ -100,7 +100,7 @@ a {
 
 .logo {
     font-family: var(--font-heading);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--primary-color);
     letter-spacing: 2px;
@@ -203,7 +203,7 @@ a {
 /* Hero Section Styles */
 .hero {
     min-height: 100vh;
-    padding-top: 100px;
+    padding-top: 60px;
     /* Space for navbar */
     display: flex;
     align-items: center;
@@ -266,19 +266,16 @@ a {
 
 .hero-img-main {
     position: absolute;
-    top: 10%;
+    top: 80px;
+    /* Thinner navbar is approx 60px; this gives 20px breathing room */
+    bottom: 20px;
+    /* Keep 20px from bottom edge of viewport */
     right: 5%;
     width: 35vw;
-    /* Fixed width based on viewport */
-    height: auto;
-    /* Height adjusts to content */
-    display: grid;
-    /* Use Grid to stack images */
-    grid-template-areas: "stack";
     max-width: 500px;
-    overflow: hidden;
-    /* Contain slides */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: grid;
+    grid-template-areas: "stack";
+    z-index: 1;
 }
 
 /* Removed .hero-img-main img rule */
@@ -286,15 +283,13 @@ a {
 /* Slider Styles for Main Image */
 .hero-img-main .slide {
     grid-area: stack;
-    /* Stack all images in the same cell */
-    position: relative;
-    /* Relative positioning for flow */
     width: 100%;
-    height: auto;
-    /* Maintain natural aspect ratio */
-    display: block;
+    height: 100%;
+    object-fit: contain;
+    /* Full image visible without cropping or cutting */
     opacity: 0;
     transition: opacity 1s ease-in-out;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* Removed conflicting .hero-img-main .slide block */
@@ -305,14 +300,20 @@ a {
 
 .hero-img-accent {
     position: absolute;
-    bottom: 10%;
+    top: 80px;
+    /* Same offset as main for consistency */
+    bottom: 40px;
+    /* Same offset as main for symmetry */
     left: 5%;
-    width: 30vw;
-    height: auto;
+    width: 25vw;
+    max-width: 350px;
     display: grid;
     grid-template-areas: "stack";
-    max-width: 400px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.hero-img-accent .slide.slide-small {
+    /* No scaling to prevent border gaps, the 25vw container handles the size reduction */
 }
 
 /* Slider Styles for Accent Image */
