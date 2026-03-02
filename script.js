@@ -265,14 +265,12 @@ if (cursorGlow) {
 // Gallery Lightbox Logic
 const modal = document.getElementById('galleryModal');
 const modalImg = document.getElementById('modalImg');
-const captionText = document.getElementById('caption');
 const closeBtn = document.querySelector('.close');
 
 document.querySelectorAll('.gallery-img').forEach(img => {
     img.addEventListener('click', function () {
         modal.classList.add('active');
         modalImg.src = this.src;
-        captionText.innerHTML = this.alt;
     });
 });
 
