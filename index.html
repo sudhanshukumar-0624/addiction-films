@@ -19,7 +19,7 @@
     <!-- Importing Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Linking the external CSS file for styling -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
 
 <body>
@@ -491,12 +491,6 @@
         </div>
     </footer>
 
-    <!-- Lightbox Modal for Gallery -->
-    <div id="galleryModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="modalImg" alt="Enlarged Gallery Image">
-    </div>
-
     <!-- Portfolio Category Modal -->
     <div id="portfolioModal" class="portfolio-modal-container">
         <span class="close-portfolio">&times;</span>
@@ -506,6 +500,12 @@
                 <!-- Javascript will populate this -->
             </div>
         </div>
+    </div>
+
+    <!-- Lightbox Modal for Gallery (Highest Priority) -->
+    <div id="galleryModal" class="modal">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImg" alt="Enlarged Gallery Image">
     </div>
 
     <!-- Linking the external JavaScript file with cache-busting -->
