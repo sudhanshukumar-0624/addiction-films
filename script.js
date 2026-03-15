@@ -154,13 +154,79 @@ allSections.forEach(section => {
     }
 });
 
-// Portfolio Item Click Effect
-document.querySelectorAll('.portfolio-item').forEach(item => {
-    item.addEventListener('click', () => {
-        const title = item.querySelector('h3').textContent;
-        alert(`View ${title} Gallery - Feature coming soon!`);
+// Portfolio Item Click Effect - Open Category Modal
+const portfolioGrid = document.getElementById('portfolioGrid');
+const portfolioModal = document.getElementById('portfolioModal');
+const portfolioModalTitle = document.getElementById('portfolioModalTitle');
+const portfolioModalGrid = document.getElementById('portfolioModalGrid');
+const closePortfolioBtn = document.querySelector('.close-portfolio');
+
+if (portfolioGrid && portfolioModal) {
+    // We use event delegation here so new items added by the admin panel are beautifully clickable!
+    portfolioGrid.addEventListener('click', (e) => {
+        const item = e.target.closest('.portfolio-item');
+        if (!item) return;
+
+        const categorySpan = item.querySelector('.category');
+        if (!categorySpan) return;
+
+        const categoryName = categorySpan.textContent;
+        
+        // Update Modal Title
+        portfolioModalTitle.textContent = categoryName + " Gallery";
+
+        // Clear existing grid in modal
+        portfolioModalGrid.innerHTML = '';
+
+        // Find all portfolio items matching this category across the entire grid
+        const allItems = document.querySelectorAll('.portfolio-item');
+        allItems.forEach(portfolioCard => {
+            const cardCat = portfolioCard.querySelector('.category');
+            if (cardCat && cardCat.textContent === categoryName) {
+                // Clone the image element 
+                const img = portfolioCard.querySelector('.portfolio-img');
+                if (img) {
+                    const clonedImg = img.cloneNode();
+                    clonedImg.className = ''; // Remove grid styling classes
+                    
+                    // Allow clicking images inside the category view to trigger the fullscreen lightbox
+                    clonedImg.addEventListener('click', () => {
+                        const galleryModal = document.getElementById('galleryModal');
+                        const modalImg = document.getElementById('modalImg');
+                        if(galleryModal && modalImg) {
+                            galleryModal.classList.add('active');
+                            modalImg.src = clonedImg.src;
+                        }
+                    });
+
+                    portfolioModalGrid.appendChild(clonedImg);
+                }
+            }
+        });
+
+        // Show the modal and lock background scrolling
+        portfolioModal.classList.add('active');
+        document.body.style.overflow = 'hidden'; 
     });
-});
+}
+
+// Close portfolio category modal via X button
+if (closePortfolioBtn) {
+    closePortfolioBtn.addEventListener('click', () => {
+        portfolioModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+}
+
+// Close portfolio category modal when clicking in the dark background
+if (portfolioModal) {
+    portfolioModal.addEventListener('click', (e) => {
+        if (e.target === portfolioModal) {
+            portfolioModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
 
 // Rotating Hero Taglines with Typing Effect
 const taglines = [

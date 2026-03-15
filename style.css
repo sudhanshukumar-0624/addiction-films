@@ -627,6 +627,76 @@ a {
     transform: scale(1.1);
 }
 
+/* Portfolio Category Modal Styles */
+.portfolio-modal-container {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.95);
+    overflow-y: auto;
+    backdrop-filter: blur(10px);
+}
+
+.portfolio-modal-container.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+.close-portfolio {
+    position: fixed;
+    top: 20px;
+    right: 35px;
+    color: var(--text-muted);
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2001;
+    transition: 0.3s;
+}
+
+.close-portfolio:hover {
+    color: var(--primary-color);
+}
+
+.portfolio-modal-content {
+    margin: 5% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+#portfolioModalTitle {
+    color: var(--primary-color);
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    font-family: var(--font-heading);
+    letter-spacing: 2px;
+}
+
+.portfolio-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.portfolio-modal-grid img {
+    width: 100%;
+    height: 350px; 
+    object-fit: cover;
+    border-radius: 4px;
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.portfolio-modal-grid img:hover {
+    transform: scale(1.02);
+}
+
 .wide {
     grid-column: span 2;
 }
