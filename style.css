@@ -1342,8 +1342,8 @@ footer {
     display: none;
     /* Hidden by default */
     position: fixed;
-    z-index: 2000;
-    /* Above navbar */
+    z-index: 9999;
+    /* Above navbar and portfolio category popup */
     left: 0;
     top: 0;
     width: 100%;
