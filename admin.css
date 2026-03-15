@@ -1,0 +1,420 @@
+:root {
+    --primary-color: #ff5722;
+    --bg-color: #0a0a0a;
+    --sidebar-bg: #111111;
+    --panel-bg: #1a1a1a;
+    --text-color: #f0f0f0;
+    --text-muted: #888;
+    --white: #ffffff;
+    --font-heading: 'Oswald', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100vh;
+    overflow: hidden;
+}
+
+h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+}
+
+/* Login Screen */
+.login-screen {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, #222 0%, #000 100%);
+}
+
+.login-box {
+    background: var(--panel-bg);
+    padding: 3rem;
+    border-radius: 8px;
+    border: 1px solid #333;
+    text-align: center;
+    width: 400px;
+}
+
+.login-logo {
+    width: 80px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.login-box h2 {
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #222;
+    border: 1px solid #444;
+    color: var(--white);
+    font-family: var(--font-body);
+    outline: none;
+    border-radius: 4px;
+}
+
+.login-box input:focus {
+    border-color: var(--primary-color);
+}
+
+.login-btn {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.login-btn:hover {
+    background: #e64a19;
+}
+
+.error-msg {
+    color: #ff3333;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    display: none;
+}
+
+/* Admin Dashboard Layout */
+.admin-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: var(--sidebar-bg);
+    border-right: 1px solid #222;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    padding: 2rem;
+    border-bottom: 1px solid #222;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.sidebar-logo {
+    width: 40px;
+    border-radius: 5px;
+}
+
+.brand h2 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+}
+
+.nav {
+    list-style: none;
+    flex-grow: 1;
+    margin-top: 1rem;
+}
+
+.nav li {
+    padding: 1rem 2rem;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+    border-left: 3px solid transparent;
+}
+
+.nav li:hover {
+    background: #1a1a1a;
+    color: var(--primary-color);
+}
+
+.nav li.active {
+    background: var(--panel-bg);
+    color: var(--primary-color);
+    border-left: 3px solid var(--primary-color);
+}
+
+.sidebar-footer {
+    padding: 2rem;
+    border-top: 1px solid #222;
+}
+
+.view-site {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.view-site:hover {
+    color: var(--white);
+}
+
+/* Main Content */
+.content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-color);
+    overflow-y: auto;
+}
+
+header {
+    background: var(--panel-bg);
+    padding: 1.5rem 3rem;
+    border-bottom: 1px solid #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 1px solid #444;
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #333;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.dashboard-body {
+    padding: 3rem;
+}
+
+/* Status Banner */
+.status-banner {
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+.status-banner.info {
+    background: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+/* Panels */
+.panel {
+    display: none;
+    background: var(--panel-bg);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid #222;
+}
+
+.panel.active {
+    display: block;
+    animation: fadeIn 0.4s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 1rem;
+}
+
+.save-btn {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.save-btn:hover {
+    background: #e64a19;
+}
+
+.text-muted {
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.service-selector {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.8rem;
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    outline: none;
+}
+
+/* Upload Area */
+.upload-area {
+    border: 2px dashed #444;
+    border-radius: 8px;
+    padding: 4rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+    background: #111;
+    margin-bottom: 3rem;
+}
+
+.upload-area:hover {
+    border-color: var(--primary-color);
+    background: rgba(255, 87, 34, 0.05);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.upload-area:hover .upload-icon {
+    color: var(--primary-color);
+}
+
+.upload-area h3 {
+    margin-bottom: 0.5rem;
+    color: var(--white);
+}
+
+.upload-area p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+/* Image Grid */
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.image-card {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #333;
+    aspect-ratio: 1; /* Make it square */
+}
+
+.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(220, 53, 69, 0.9);
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.remove-btn:hover {
+    background: #c82333;
+    transform: scale(1.1);
+}
+
+.loading-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: #222;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--primary-color);
+    text-align: center;
+    color: var(--primary-color);
+    font-weight: bold;
+    z-index: 1000;
+}
+
+.loading-overlay i {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    align-items: center; justify-content: center;
+    z-index: 10000;
+}
+.modal.active { display: flex; }
+.admin-modal {
+    background: var(--panel-bg);
+    padding: 2rem; border-radius: 8px;
+    border: 1px solid #444; text-align: center;
+    width: 300px; color: white;
+}
+.admin-modal h3 { color: var(--primary-color); margin-bottom: 10px; }
+.admin-modal p { margin-bottom: 20px; color: #ccc;}
+.btn-primary { background: var(--primary-color); border:none; color:white; padding: 10px 20px; border-radius: 4px; cursor:pointer;}

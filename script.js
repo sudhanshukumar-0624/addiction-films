@@ -143,7 +143,8 @@ const observer = new IntersectionObserver((entries) => {
 // Select and observe all sections except hero (which is already visible)
 const allSections = document.querySelectorAll('section');
 allSections.forEach(section => {
-    if (!section.classList.contains('hero')) {
+    // Only animate specific content sections
+    if (!section.classList.contains('hero') && !section.classList.contains('photo-reel')) {
         // Set initial state: invisible and shifted down
         section.style.opacity = '0';
         section.style.transform = 'translateY(20px)';
@@ -289,3 +290,21 @@ if (modal) {
         }
     });
 }
+
+// Dynamic Gallery Slider Logic
+const galleryItems = document.querySelectorAll('.gallery-item');
+
+galleryItems.forEach(item => {
+    const slides = item.querySelectorAll('.slide');
+    if (slides.length <= 1) return; // No need to slide if only 1 image
+    
+    // Get custom interval from data attribute, default to 3000ms
+    const interval = parseInt(item.getAttribute('data-interval')) || 3000;
+    let currentSlide = 0;
+
+    setInterval(() => {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }, interval);
+});

@@ -43,6 +43,7 @@
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -170,33 +171,48 @@
         </div>
     </section>
 
-    <!-- Gallery Grid Section -->
-    <section class="gallery">
+    <!-- Gallery Grid Section (Dynamic Sliding Gallery) -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2>Dynamic Gallery</h2>
+        </div>
         <div class="gallery-grid">
-            <!-- Individual gallery items with varying sizes -->
-            <div class="gallery-item tall">
-                <img src="images/flickr-1.jpg" alt="Gallery Image 1" class="gallery-img">
+            <!-- Individual gallery items with varying sizes and different time intervals -->
+            <div class="gallery-item tall" data-interval="4000">
+                <img src="images/flickr-1.jpg" alt="Gallery Image 1" class="gallery-img slide active">
+                <img src="images/flickr-3.jpg" alt="Gallery Image 1b" class="gallery-img slide">
+                <img src="images/flickr-5.jpg" alt="Gallery Image 1c" class="gallery-img slide">
             </div>
-            <div class="gallery-item">
-                <img src="images/flickr-5.jpg" alt="Gallery Image 2" class="gallery-img">
+            <div class="gallery-item" data-interval="3000">
+                <img src="images/flickr-5.jpg" alt="Gallery Image 2" class="gallery-img slide active">
+                <img src="images/flickr-2.jpg" alt="Gallery Image 2b" class="gallery-img slide">
             </div>
-            <div class="gallery-item wide">
-                <img src="images/flickr-3.jpg" alt="Gallery Image 3" class="gallery-img">
+            <div class="gallery-item wide" data-interval="5000">
+                <img src="images/flickr-3.jpg" alt="Gallery Image 3" class="gallery-img slide active">
+                <img src="images/flickr-1.jpg" alt="Gallery Image 3b" class="gallery-img slide">
+                <img src="images/flickr-4.jpg" alt="Gallery Image 3c" class="gallery-img slide">
             </div>
-            <div class="gallery-item">
-                <img src="images/flickr-4.jpg" alt="Gallery Image 4" class="gallery-img">
+            <div class="gallery-item" data-interval="3500">
+                <img src="images/flickr-4.jpg" alt="Gallery Image 4" class="gallery-img slide active">
+                <img src="images/flickr-2.jpg" alt="Gallery Image 4b" class="gallery-img slide">
             </div>
-            <div class="gallery-item big">
-                <img src="images/flickr-2.jpg" alt="Gallery Image 5" class="gallery-img">
+            <div class="gallery-item big" data-interval="6000">
+                <img src="images/flickr-2.jpg" alt="Gallery Image 5" class="gallery-img slide active">
+                <img src="images/flickr-5.jpg" alt="Gallery Image 5b" class="gallery-img slide">
+                <img src="images/flickr-1.jpg" alt="Gallery Image 5c" class="gallery-img slide">
             </div>
-            <div class="gallery-item tall">
-                <img src="images/flickr-5.jpg" alt="Gallery Image 6" class="gallery-img">
+            <div class="gallery-item tall" data-interval="4500">
+                <img src="images/flickr-5.jpg" alt="Gallery Image 6" class="gallery-img slide active">
+                <img src="images/flickr-3.jpg" alt="Gallery Image 6b" class="gallery-img slide">
             </div>
-            <div class="gallery-item">
-                <img src="images/flickr-1.jpg" alt="Gallery Image 7" class="gallery-img">
+            <div class="gallery-item" data-interval="2500">
+                <img src="images/flickr-1.jpg" alt="Gallery Image 7" class="gallery-img slide active">
+                <img src="images/flickr-4.jpg" alt="Gallery Image 7b" class="gallery-img slide">
+                <img src="images/flickr-5.jpg" alt="Gallery Image 7c" class="gallery-img slide">
             </div>
-            <div class="gallery-item wide">
-                <img src="images/flickr-3.jpg" alt="Gallery Image 8" class="gallery-img">
+            <div class="gallery-item wide" data-interval="5500">
+                <img src="images/flickr-3.jpg" alt="Gallery Image 8" class="gallery-img slide active">
+                <img src="images/flickr-2.jpg" alt="Gallery Image 8b" class="gallery-img slide">
             </div>
         </div>
     </section>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Addiction Films</title>
+    <link rel="icon" type="image/jpeg" href="images/logo 2.jpg">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-box">
+            <img src="images/logo 2.jpg" alt="Logo" class="login-logo">
+            <h2>Admin Security Login</h2>
+            <form id="loginForm">
+                <input type="password" id="adminToken" placeholder="Paste GitHub Admin Key (ghp_...)" required>
+                <button type="submit" class="login-btn">Secure Login</button>
+            </form>
+            <p class="error-msg" id="loginError">Invalid GitHub Token.</p>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard (Hidden initially) -->
+    <div id="adminDashboard" class="admin-container" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <img src="images/logo 2.jpg" alt="Logo" class="sidebar-logo">
+                <h2>Addiction Admin</h2>
+            </div>
+            <ul class="nav">
+                <li class="active" data-target="galleryTab"><i class="fas fa-th"></i> Edit Gallery</li>
+                <li data-target="heroTab"><i class="fas fa-home"></i> Edit Hero Photos</li>
+                <li data-target="portfolioTab"><i class="fas fa-images"></i> Edit Portfolio</li>
+            </ul>
+            <div class="sidebar-footer">
+                <a href="index.html" target="_blank" class="view-site"><i class="fas fa-external-link-alt"></i> View Website</a>
+            </div>
+            <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Uploading to Website...</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <header>
+                <h1>Website Image Manager</h1>
+                <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </header>
+
+            <div class="dashboard-body">
+                <div class="status-banner info">
+                    <i class="fas fa-check-circle"></i> 
+                    <strong>GitHub Connection Active:</strong> Uploading photos here will instantly save them to your GitHub repository and update your live website within 30 seconds!
+                </div>
+
+                <!-- Gallery Tab -->
+                <div class="panel active" id="galleryTab">
+                    <div class="panel-header">
+                        <h2>Upload to Dynamic Gallery Slider</h2>
+                    </div>
+                    <p class="text-muted">Upload a photo to automatically add it to the sliding gallery grid.</p>
+                    
+                    <div class="upload-area" onclick="document.getElementById('uploadGallery').click()">
+                        <input type="file" id="uploadGallery" accept="image/jpeg, image/png, image/webp" hidden>
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <h3>Click to upload photo</h3>
+                    </div>
+                </div>
+
+                <!-- Hero Tab -->
+                <div class="panel" id="heroTab">
+                    <div class="panel-header">
+                        <h2>Upload to Homepage Hero Slider</h2>
+                    </div>
+                    
+                    <div class="upload-area" onclick="document.getElementById('uploadHero').click()">
+                        <input type="file" id="uploadHero" accept="image/jpeg, image/png, image/webp" hidden>
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <h3>Click to select photo for Hero Main section</h3>
+                    </div>
+                </div>
+
+                <!-- Portfolio Tab -->
+                <div class="panel" id="portfolioTab">
+                    <div class="panel-header">
+                        <h2>Upload to Portfolio Grid</h2>
+                    </div>
+                    
+                    <p>Select category for the uploaded photo:</p>
+                    <select class="service-selector" id="portfolioCategory">
+                        <option value="Wedding">Wedding</option>
+                        <option value="Pre-Wedding">Pre-Wedding</option>
+                        <option value="Reception">Reception</option>
+                        <option value="Candid">Candid</option>
+                        <option value="Traditional">Traditional</option>
+                        <option value="Portraits">Portraits</option>
+                    </select>
+
+                    <input type="text" id="portfolioTitle" placeholder="Photo Title (Example: 'Ceremony Moments')" class="service-selector" style="margin-top:0;">
+                    <input type="text" id="portfolioDesc" placeholder="Photo Description (Example: 'Sacred rituals beautifully captured')" class="service-selector" style="margin-top:0;">
+
+                    <div class="upload-area" onclick="document.getElementById('uploadPortfolio').click()">
+                        <input type="file" id="uploadPortfolio" accept="image/jpeg, image/png, image/webp" hidden>
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <h3>Click to upload new portfolio work</h3>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Alert Modal -->
+    <div id="alertModal" class="modal">
+        <div class="modal-content admin-modal">
+            <h3 id="alertTitle">Success!</h3>
+            <p id="alertBody">Image uploaded successfully.</p>
+            <button onclick="document.getElementById('alertModal').classList.remove('active')" class="btn-primary">OK</button>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>
