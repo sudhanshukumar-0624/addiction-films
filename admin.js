@@ -173,68 +173,139 @@ document.addEventListener('DOMContentLoaded', () => {
     // UPLOAD LOGIC
     // --------------------------------------------------------
 
+    // File Selection State
+    let selectedGalleryFile = null;
+    let selectedHeroFile = null;
+    let selectedPortfolioFile = null;
+
+    // Helper to render local file previews in the upload areas
+    function showImagePreview(inputId, file) {
+        const input = document.getElementById(inputId);
+        const uploadArea = input.closest('.upload-area');
+        
+        let preview = uploadArea.querySelector('.preview-container');
+        if (!preview) {
+            preview = document.createElement('div');
+            preview.className = 'preview-container';
+            uploadArea.appendChild(preview);
+        }
+        
+        // Hide standard text and icon
+        Array.from(uploadArea.children).forEach(child => {
+            if (child !== preview && child !== input) {
+                child.style.display = 'none';
+            }
+        });
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            preview.innerHTML = `
+                <img src="${e.target.result}" class="preview-img" style="max-height: 120px; border-radius: 6px; margin-bottom: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); border: 1px solid var(--primary-color);">
+                <p style="color: var(--primary-color); font-weight: bold; margin-bottom: 5px; font-size: 0.9rem;">${file.name}</p>
+                <p style="color: var(--text-muted); font-size: 0.75rem;">Click anywhere inside this dashed area to change photo</p>
+            `;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // Helper to reset upload area back to original state
+    function resetUploadArea(inputId) {
+        const input = document.getElementById(inputId);
+        const uploadArea = input.closest('.upload-area');
+        
+        const preview = uploadArea.querySelector('.preview-container');
+        if (preview) {
+            preview.remove();
+        }
+        
+        Array.from(uploadArea.children).forEach(child => {
+            if (child !== input) {
+                child.style.display = '';
+            }
+        });
+    }
+
     // GALLERY UPLOAD
     const uploadGallery = document.getElementById('uploadGallery');
-    uploadGallery.addEventListener('change', async (e) => {
+    uploadGallery.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (!file) return;
+        selectedGalleryFile = file;
+        showImagePreview('uploadGallery', file);
+    });
+
+    const btnPublishGallery = document.getElementById('btnPublishGallery');
+    btnPublishGallery.addEventListener('click', async () => {
+        if (!selectedGalleryFile) {
+            showAlert('No Photo Selected', 'Please click on the dashed upload box above to select a photo first.');
+            return;
+        }
 
         toggleLoading(true);
         try {
-            // 1. Upload the physical photo to GitHub images/gallery/ folder
-            const uploadedPath = await uploadImageFile(file, 'gallery');
+            // 1. Upload photo to GitHub
+            const uploadedPath = await uploadImageFile(selectedGalleryFile, 'gallery');
 
-            // 2. Parse the current index.html internally
+            // 2. Parse index.html
             const parser = new DOMParser();
             const doc = parser.parseFromString(siteHTML, 'text/html');
 
-            // 3. Find all gallery containers to randomly inject the new sliding image into
+            // 3. Inject image slide into random slot
             const galleryContainers = Array.from(doc.querySelectorAll('.gallery-grid .gallery-item'));
-            if(galleryContainers.length > 0) {
-                // Pick a random grid box to shove the new photo into so it shuffles naturally
+            if (galleryContainers.length > 0) {
                 const randomGridSlot = galleryContainers[Math.floor(Math.random() * galleryContainers.length)];
-                
-                // Construct the image tag (slide class makes it crossfade automatically)
                 const newImgDiv = doc.createElement('img');
                 newImgDiv.src = uploadedPath;
                 newImgDiv.alt = "New Admin Upload";
                 newImgDiv.className = "gallery-img slide";
-                
                 randomGridSlot.appendChild(newImgDiv);
 
-                // 4. Save and commit HTML changes Back!
+                // 4. Save and commit HTML updates
                 await saveHTMLUpdate(doc.documentElement.outerHTML, "Admin added new dynamic gallery image via Dashboard");
                 showAlert('Success!', 'The image was uploaded to the sliding gallery. It will appear on the live website shortly.');
+                
+                // Clear selection and state
+                selectedGalleryFile = null;
+                resetUploadArea('uploadGallery');
+                uploadGallery.value = '';
             } else {
                 showAlert('Error', 'Could not locate Gallery in the HTML code.');
             }
-
         } catch (error) {
             console.error(error);
             showAlert('Error', 'Failed during upload sequence.');
         } finally {
             toggleLoading(false);
-            e.target.value = ''; // Reset input
         }
     });
 
 
     // HERO UPLOAD
     const uploadHero = document.getElementById('uploadHero');
-    uploadHero.addEventListener('change', async (e) => {
+    uploadHero.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (!file) return;
+        selectedHeroFile = file;
+        showImagePreview('uploadHero', file);
+    });
+
+    const btnPublishHero = document.getElementById('btnPublishHero');
+    btnPublishHero.addEventListener('click', async () => {
+        if (!selectedHeroFile) {
+            showAlert('No Photo Selected', 'Please click on the dashed upload box above to select a photo first.');
+            return;
+        }
 
         toggleLoading(true);
         try {
-            // 1. Upload photo
-            const uploadedPath = await uploadImageFile(file, 'hero');
+            // 1. Upload photo to GitHub
+            const uploadedPath = await uploadImageFile(selectedHeroFile, 'hero');
 
             // 2. Parse HTML
             const parser = new DOMParser();
             const doc = parser.parseFromString(siteHTML, 'text/html');
 
-            // 3. Append to the hero-img-main slider
+            // 3. Append to hero background
             const heroMainContainer = doc.querySelector('.hero-img-main');
             if (heroMainContainer) {
                 const newImg = doc.createElement('img');
@@ -245,41 +316,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // 4. Save HTML
                 await saveHTMLUpdate(doc.documentElement.outerHTML, "Admin added new Hero image via Dashboard");
-                showAlert('Success!', 'The image was uploaded to the massive Hero sliding background.');
+                showAlert('Success!', 'The image was uploaded to the Hero sliding background.');
+                
+                // Clear selection and state
+                selectedHeroFile = null;
+                resetUploadArea('uploadHero');
+                uploadHero.value = '';
+            } else {
+                showAlert('Error', 'Could not locate Hero Slider in the HTML code.');
             }
         } catch (error) {
             console.error(error);
             showAlert('Error', 'Failed to upload hero image.');
         } finally {
             toggleLoading(false);
-            e.target.value = '';
         }
     });
 
     // PORTFOLIO UPLOAD
+    const portfolioCategory = document.getElementById('portfolioCategory');
+    const portfolioCategoryOther = document.getElementById('portfolioCategoryOther');
+    
+    portfolioCategory.addEventListener('change', () => {
+        if (portfolioCategory.value === 'Other') {
+            portfolioCategoryOther.style.display = 'block';
+        } else {
+            portfolioCategoryOther.style.display = 'none';
+        }
+    });
+
     const uploadPortfolio = document.getElementById('uploadPortfolio');
-    uploadPortfolio.addEventListener('change', async (e) => {
+    uploadPortfolio.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (!file) return;
+        selectedPortfolioFile = file;
+        showImagePreview('uploadPortfolio', file);
+    });
 
-        const cat = document.getElementById('portfolioCategory').value;
-        const title = document.getElementById('portfolioTitle').value || 'Captured Moment';
-        const desc = document.getElementById('portfolioDesc').value || 'Addiction Films Exclusive';
+    const btnPublishPortfolio = document.getElementById('btnPublishPortfolio');
+    btnPublishPortfolio.addEventListener('click', async () => {
+        if (!selectedPortfolioFile) {
+            showAlert('No Photo Selected', 'Please click on the dashed upload box above to select a photo first.');
+            return;
+        }
+
+        let cat = portfolioCategory.value;
+        if (cat === 'Other') {
+            cat = portfolioCategoryOther.value.trim() || 'Other';
+        }
+        const title = document.getElementById('portfolioTitle').value.trim() || 'Captured Moment';
+        const desc = document.getElementById('portfolioDesc').value.trim() || 'Addiction Films Exclusive';
 
         toggleLoading(true);
         try {
-            // 1. Upload photo
-            const uploadedPath = await uploadImageFile(file, 'portfolio');
+            // 1. Upload photo to GitHub
+            const uploadedPath = await uploadImageFile(selectedPortfolioFile, 'portfolio');
 
             // 2. Parse HTML
             const parser = new DOMParser();
             const doc = parser.parseFromString(siteHTML, 'text/html');
 
-            // 3. Create the new portfolio card HTML structure
+            // 3. Insert card into Portfolio Grid
             const portfolioGrid = doc.querySelector('#portfolioGrid');
             if (portfolioGrid) {
-                
-                // To look nice, give every 3rd or 4th item a "large" class automatically based on count
                 const currentCards = doc.querySelectorAll('.portfolio-item').length;
                 const isLarge = (currentCards % 4 === 0) ? 'large' : '';
 
@@ -295,24 +394,32 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>`;
 
-                // Add to the START of the grid
                 portfolioGrid.insertAdjacentHTML('afterbegin', cardHTML);
 
                 // 4. Save HTML
                 await saveHTMLUpdate(doc.documentElement.outerHTML, `Admin added new ${cat} Portfolio image`);
                 showAlert('Success!', `New Portfolio item '${title}' successfully added!`);
                 
-                // Clear text boxes
+                // Clear inputs and state
                 document.getElementById('portfolioTitle').value = '';
                 document.getElementById('portfolioDesc').value = '';
+                portfolioCategoryOther.value = '';
+                portfolioCategoryOther.style.display = 'none';
+                portfolioCategory.value = 'Wedding';
+                
+                selectedPortfolioFile = null;
+                resetUploadArea('uploadPortfolio');
+                uploadPortfolio.value = '';
+            } else {
+                showAlert('Error', 'Could not locate Portfolio Grid in the HTML code.');
             }
         } catch (error) {
             console.error(error);
             showAlert('Error', 'Failed to upload portfolio image.');
         } finally {
             toggleLoading(false);
-            e.target.value = '';
         }
     });
 
 });
+
